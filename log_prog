@@ -1,0 +1,86 @@
+#include <iostream>
+void exibirCardapio();
+int escolherItem();
+int escolherItem();
+float calcularValorTotal(int codigo, int quantidade);
+void imprimirComprovante(int codigo, int quantidade, float total);
+
+using namespace std;
+
+void exibirCardapio(){ //quando a funcao nao retorna nada tem que ser tipo void
+    printf("========CARDAPIO========\n");
+    printf("1- Expresso.....R$ 5.00\n");
+    printf("2- Cappuccino...R$ 10.00\n");
+    printf("3- Mochaccino...R$ 15.00\n");
+    printf("========================\n");
+}
+
+int escolherItem(){
+    int codigo;
+    printf("Digite o codigo da bebida desejada: ");
+    scanf("%d", &codigo);
+    return codigo;
+}
+
+int escolherQuantidade(){
+    int quantidade;
+    printf("Digite a quantidade desejada: ");
+    scanf("%d", &quantidade);
+    return quantidade;
+}
+
+float calcularValorTotal(int codigo, int quantidade) {
+    float preco;
+    switch(codigo) { //referente ao valor do codigo
+    case 1:
+        preco = 5.0;
+        break; //para a execucao
+    case 2:
+        preco = 10.0;
+        break;
+    case 3:
+        preco = 15.0;
+        break;
+    default: //qualquer coisa que nn seja 1, 2 ou 3
+        printf("Codigo invalido! Valor total sera R$ 0.00\n");
+        preco = 0.0;
+        break;
+    }
+    float total = preco*quantidade;
+    return total;
+}
+
+void imprimirComprovante(int codigo, int quantidade, float total){
+    char produto[20];
+    switch(codigo) {
+    case 1:
+        sprintf(produto, "Expresso");
+        break;
+    case 2:
+        sprintf(produto, "Cappuccino");
+        break;
+    case 3:
+        sprintf(produto, "Mochaccino");
+        break;
+    default:
+        sprintf(produto, "Invalido");
+        break;
+    }
+    printf("=====COMPROVANTE=====\n");
+    printf("Item: %s\n", produto);
+    printf("Quantidade: %d\n", quantidade);
+    printf("Valor total: R$ %f.2\n", total);
+    printf("=====================");
+    }
+
+int main() {
+    exibirCardapio();
+
+    int item = escolherItem(); //item e igual ao codigo que o usuario digitou
+    int qnt = escolherQuantidade();
+
+    float total = calcularValorTotal(item, qnt);
+
+    imprimirComprovante(item, qnt, total);
+    return 0;
+}
